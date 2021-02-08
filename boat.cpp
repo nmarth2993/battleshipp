@@ -98,6 +98,7 @@ std::string boat::getName() const
     return this->name;
 }
 
+// returns a boolean of whether or not the ship has the given position
 bool boat::hasPos(const position pos) const
 {
     // iterate over vector
@@ -113,7 +114,7 @@ bool boat::hasPos(const position pos) const
 }
 
 // returns the index of the matching positition, -1 if no match found
-bool boat::hasPosIndex(const position pos) const
+int boat::hasPosIndex(const position pos) const
 {
     for (std::vector<position>::size_type i = 0; i != this->displacement->size(); i++)
     {
@@ -123,6 +124,52 @@ bool boat::hasPosIndex(const position pos) const
         }
     }
     return -1;
+}
+
+// return strue if `pos` is on the boat
+bool boat::onBoat(const position pos) const
+{
+    return this->hasPos(pos);
+}
+
+// returns true if `pos` is hit, else false
+bool boat::isHit(const position pos) const
+{
+    if (!this->hasPos(pos))
+    {
+        return false;
+    }
+    else
+    {
+        // this is not the *best* structure but I
+        // am following years-old code from myself and
+        // I'll just roll with it
+        return this->hits[hasPosIndex(pos)];
+    }
+}
+
+// records a hit on the boat if `pos` matches
+// any position on the boat's displacement
+void boat::hit(const position pos)
+{
+    if (this->hasPos(pos))
+    {
+        this->hits[hasPosIndex(pos)] = true;
+    }
+}
+
+// returns true if the boat is sunk, else false
+// the boat is sunk when all of the positons have been hit
+bool boat::sunk() const
+{
+    for (int i = 0; i < this->getLength(); i++)
+    {
+        if (!this->hits[i])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 // boat destructor

@@ -16,6 +16,9 @@ private:
     bool *hits;
     std::vector<position> *displacement;
 
+    bool hasPos(const position pos) const;
+    int hasPosIndex(const position pos) const;
+
 public:
     boat(position pos, std::string name, bool vertical);
 
@@ -28,8 +31,11 @@ public:
     std::string getName() const;
     bool isVertical() const;
 
-    bool hasPos(const position pos) const;
-    bool hasPosIndex(const position pos) const;
+    bool boat::onBoat(const position pos) const;
+
+    bool isHit(const position pos) const;
+    void hit(const position pos);
+    bool sunk() const;
 
     ~boat();
 };

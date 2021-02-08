@@ -2,7 +2,7 @@
 
 #include "position.hpp"
 
-position::position(unsigned char row, unsigned char col) : row(row), col(col)
+position::position(int row, int col) : row(row), col(col)
 {
 }
 
@@ -28,18 +28,28 @@ bool position::operator!=(const position &pos) const
 // so don't use class::operator<<, because it is a global function
 std::ostream &operator<<(std::ostream &out, const position &pos)
 {
-    out << "(" << (int)pos.row << ", " << (int)pos.col << ")";
+    out << pos.getRow() << "-" << pos.getCol();
     return out;
 }
 
-int position::getRow()
+char position::getRow() const
 {
-    return (int)row;
+    return (char)(row + 'A' - 1);
 }
 
-int position::getCol()
+int position::getCol() const
 {
     return (int)col;
+}
+
+int position::getRowIndex() const
+{
+    return (int)row - 1;
+}
+
+int position::getColIndex() const
+{
+    return (int)col - 1;
 }
 
 position::~position()
@@ -48,7 +58,7 @@ position::~position()
 
 // int main()
 // {
-//     position pos(1, 2);
+//     position pos(1, 1);
 //     position another(1, 3);
 //     position same(1, 3);
 
@@ -62,8 +72,14 @@ position::~position()
 //     }
 
 //     std::cout << "col: " << pos.getCol() << std::endl;
+//     std::cout << "row: " << pos.getRow() << std::endl;
+
+//     std::cout << "colIndex: " << another.getColIndex() << std::endl;
+//     std::cout << "rowIndex: " << another.getRowIndex() << std::endl;
 
 //     std::cout << pos;
+//     // std::cout << another;
+//     // std::cout << same;
 
 //     std::cout << std::endl;
 //     return 0;

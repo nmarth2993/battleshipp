@@ -5,11 +5,11 @@
 class position
 {
 private:
-    unsigned char row;
-    unsigned char col;
+    int row;
+    int col;
 
 public:
-    position(unsigned char row, unsigned char col);
+    position(int row, int col);
     ~position();
     position(const position &pos);
     bool operator==(const position &pos) const;
@@ -19,8 +19,11 @@ public:
     // !LEARNED! the friend operator is for non-member methods
     friend std::ostream &operator<<(std::ostream &out, const position &pos);
 
-    int getRow();
-    int getCol();
+    char getRow() const;
+    int getCol() const;
+
+    int getRowIndex() const;
+    int getColIndex() const;
 };
 
 #endif
