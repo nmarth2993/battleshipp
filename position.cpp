@@ -6,10 +6,8 @@ position::position(int row, int col) : row(row), col(col)
 {
 }
 
-position::position(const position &pos)
+position::position(const position &pos) : row(pos.row), col(pos.col)
 {
-    col = pos.col;
-    row = pos.row;
 }
 
 // !LEARNED! the const identifier after the method header
@@ -34,22 +32,22 @@ std::ostream &operator<<(std::ostream &out, const position &pos)
 
 char position::getRow() const
 {
-    return (char)(row + 'A' - 1);
+    return (char)(row + 'A');
 }
 
 int position::getCol() const
 {
-    return (int)col;
+    return (int)col + 1;
 }
 
 int position::getRowIndex() const
 {
-    return (int)row - 1;
+    return (int)row;
 }
 
 int position::getColIndex() const
 {
-    return (int)col - 1;
+    return (int)col;
 }
 
 position::~position()

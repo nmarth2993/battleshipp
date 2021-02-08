@@ -26,12 +26,11 @@ public:
 
     int getLength() const;
     char abbrev() const;
-    std::string getName() const;
     position getPos() const;
     std::string getName() const;
     bool isVertical() const;
 
-    bool boat::onBoat(const position pos) const;
+    bool onBoat(const position pos) const;
 
     bool isHit(const position pos) const;
     void hit(const position pos);
@@ -48,6 +47,8 @@ enum BOAT_LENGTHS
     CARRIER,
     CRUISER = 3
 };
+
+#define CRUISER_INDEX 4
 
 static const std::string BOAT_NAMES[] = {
     "Destroyer",

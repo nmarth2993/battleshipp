@@ -51,7 +51,7 @@ BoundsException::BoundsException()
 
 char const *BoundsException::what() const throw()
 {
-    return "Out of bounds";
+    return "Out of bounds exception";
 }
 
 BoundsException::~BoundsException()
@@ -76,7 +76,7 @@ OverlapException::OverlapException()
 
 char const *OverlapException::what() const throw()
 {
-    return "Overlap";
+    return "Overlap exception";
 }
 
 OverlapException::~OverlapException()

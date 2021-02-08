@@ -1,9 +1,12 @@
-#define BOUND_ERR_MSG "Out of bounds"
-#define OVERLAP_ERR_MSG "Overlap"
+// #define BOUND_ERR_MSG boundexcept
+// #define OVERLAP_ERR_MSG overlapexcept
 
 #include <time.h>
 
 #include "ocean.hpp"
+
+// static BoundsException boundexcept;
+// static OverlapException overlapexcept;
 
 ocean::ocean()
 {
@@ -24,19 +27,19 @@ void ocean::placeBoat(std::string boatName, bool vertical, position pos)
 
     if (pos.getRowIndex() < 0 || pos.getColIndex() < 0 || pos.getRowIndex() > 9 || pos.getColIndex() > 9)
     {
-        throw BOUND_ERR_MSG;
+        throw std::exception();
     }
     if (vertical)
     {
         if (boat.getLength() - 1 + pos.getRowIndex() > 9)
         {
-            throw BOUND_ERR_MSG;
+            throw std::exception();
         }
         for (int row = pos.getRowIndex(); row < boat.getLength(); row++)
         {
             if (grid[row][pos.getColIndex()] != -1)
             {
-                throw OVERLAP_ERR_MSG;
+                throw std::exception();
             }
         }
         for (int row = pos.getRowIndex(); row < boat.getLength(); row++)
@@ -48,13 +51,13 @@ void ocean::placeBoat(std::string boatName, bool vertical, position pos)
     {
         if (boat.getLength() - 1 + pos.getColIndex() > 9)
         {
-            throw BOUND_ERR_MSG;
+            throw std::exception();
         }
         for (int col = pos.getColIndex(); col < boat.getLength(); col++)
         {
             if (grid[pos.getRowIndex()][col] != -1)
             {
-                throw OVERLAP_ERR_MSG;
+                throw std::exception();
             }
         }
         for (int col = pos.getColIndex(); col < boat.getLength(); col++)
@@ -73,6 +76,7 @@ void ocean::placeAllBoats()
     bool placed = false;
     for (std::string name : BOAT_NAMES)
     {
+        std::cout << "trying to place: " << name << std::endl;
         while (!placed)
         {
             try
@@ -80,7 +84,7 @@ void ocean::placeAllBoats()
                 placed = true;
                 placeBoat(name, (bool)rand() % 2, position(rand() % 9 + 1, rand() % 9 + 1));
             }
-            catch (const std::string &errmsg)
+            catch (const std::exception &errmsg)
             {
                 // no error output because this is expected to happen
                 // (it will spam the console otherwise)
@@ -111,6 +115,40 @@ bool ocean::allSunk() const
         }
     }
     return true;
+}
+
+char ocean::boatInitial(const position pos) const
+{
+    if (grid[pos.getRowIndex()][pos.getColIndex()] != -1)
+    {
+        return fleet.at(grid[pos.getRowIndex()][pos.getColIndex()]).abbrev();
+    }
+    return ' ';
+}
+std::string ocean::boatName(const position pos) const
+{
+    if (grid[pos.getRowIndex()][pos.getColIndex()] != -1)
+    {
+        return fleet.at(grid[pos.getRowIndex()][pos.getColIndex()]).getName();
+    }
+    return "";
+}
+
+bool ocean::hit(const position pos)
+{
+    if (grid[pos.getRowIndex()][pos.getColIndex()] != -1)
+    {
+        return fleet.at(grid[pos.getRowIndex()][pos.getColIndex()]).isHit(pos);
+    }
+    return false;
+}
+
+void ocean::shootAt(const position pos)
+{
+    if (grid[pos.getRowIndex()][pos.getColIndex()] != -1)
+    {
+        fleet.at(grid[pos.getRowIndex()][pos.getColIndex()]).hit(pos);
+    }
 }
 
 ocean::~ocean()

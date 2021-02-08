@@ -23,6 +23,11 @@ boat::boat(position pos, std::string name, bool vertical) : pos(pos), name(name)
 
     int length = this->getLength();
     std::cout << "len: " << length << std::endl;
+    if (length == -1)
+    {
+        std::cerr << "ships cannot have negative length" << std::endl;
+        exit(-1);
+    }
 
     // make arrays to keep track of hits and positions of ship
     // !LEARNED! don't forget the this-> to operate on the instance
@@ -38,15 +43,18 @@ boat::boat(position pos, std::string name, bool vertical) : pos(pos), name(name)
     // build displacement array
     for (int i = 0; i < length; i++)
     {
-        std::cout << "pushed x: " << this->pos.getRow() + (this->isVertical() ? i : 0) << " pushed y: " << this->pos.getCol() + (this->isVertical() ? 0 : i) << std::endl;
-        boatPositions->push_back(position(this->pos.getRow() + (this->isVertical() ? i : 0), this->pos.getCol() + (this->isVertical() ? 0 : i)));
+        std::cout << "pushed x: " << this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0) << " pushed y: " << this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i) << std::endl;
+        boatPositions->push_back(position(this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0), this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i)));
     }
 }
 
 int boat::getLength() const
 {
-    if (this->name.compare(BOAT_NAMES[5]))
+    // !LEARNED! arrays are 0-indexed :^)
+    // also this is why we don't hard-code things
+    if (!this->name.compare(BOAT_NAMES[CRUISER_INDEX]))
     {
+        // std::cout << "cruiser" << std::endl;
         return 3;
     }
     else
@@ -56,10 +64,12 @@ int boat::getLength() const
             if (!this->name.compare(BOAT_NAMES[i]))
             {
                 // other than the last one, the indices will offset +2
+                // std::cout << "match at index " << i << ", len: " << i + 2 << std::endl;
                 return i + 2;
             }
         }
     }
+    // std::cerr << "failed to match length to name: " << this->name << std::endl;
 
     return -1;
 }
@@ -76,11 +86,6 @@ std::ostream &operator<<(std::ostream &out, const boat &boat)
 position boat::getPos() const
 {
     return this->pos;
-}
-
-std::string boat::getName() const
-{
-    return this->name;
 }
 
 bool boat::isVertical() const
@@ -175,28 +180,31 @@ bool boat::sunk() const
 // boat destructor
 boat::~boat()
 {
+    std::cout << "destroying boat" << std::endl;
+    std::cout << *this << std::endl;
     delete[] this->hits;
     delete this->displacement;
+    std::cout << "destroyed boat" << std::endl;
 }
 
-int main(int argc, const char *argv[])
-{
-    boat b(position{1, 1}, std::string{"Destroyer"}, false);
-    boat c(position{1, 2}, std::string{"Carrier"}, true);
+// int main(int argc, const char *argv[])
+// {
+//     boat b(position{1, 1}, std::string{"Destroyer"}, false);
+//     boat c(position{1, 2}, std::string{"Carrier"}, true);
 
-    std::cout << b << '\n';
-    std::cout << c << '\n';
+//     std::cout << b << '\n';
+//     std::cout << c << '\n';
 
-    // !LEARNED! I don't need to (should NOT) call these destructors
-    // this will cause a double free. the reason for this is that b and c
-    // were both made on the stack, NOT using the new keyword
-    // this means that once they are out of scope, they will be automatically
-    // deallocated and any deallocation before will cause this second automatic
-    // deallocation to throw a double free error
-    // if I were to have created b and c with new, then I would have to manually
-    // destroy them or else they would be leaked
-    // b.~boat();
-    // c.~boat();
+//     // !LEARNED! I don't need to (should NOT) call these destructors
+//     // this will cause a double free. the reason for this is that b and c
+//     // were both made on the stack, NOT using the new keyword
+//     // this means that once they are out of scope, they will be automatically
+//     // deallocated and any deallocation before will cause this second automatic
+//     // deallocation to throw a double free error
+//     // if I were to have created b and c with new, then I would have to manually
+//     // destroy them or else they would be leaked
+//     // b.~boat();
+//     // c.~boat();
 
-    return 0;
-}
+//     return 0;
+// }
