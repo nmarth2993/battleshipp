@@ -138,7 +138,7 @@ void ocean::placeAllBoats()
     bool placed = false;
     for (std::string name : BOAT_NAMES)
     {
-        std::cout << "trying to place: " << name << std::endl;
+        // std::cout << "trying to place: " << name << std::endl;
         while (!placed)
         {
             try
@@ -171,6 +171,17 @@ bool ocean::sunk(const position pos) const
 
 bool ocean::allSunk() const
 {
+    for (boat *b : *this->fleet)
+    {
+        // std::cout << *b << std::endl;
+        if (!b->sunk())
+        {
+            return false;
+        }
+    }
+    return true;
+
+    /*
     for (int i = 0; i < this->boatIndex; i++)
     {
         if (!fleet->at(i)->sunk())
@@ -179,6 +190,7 @@ bool ocean::allSunk() const
         }
     }
     return true;
+    */
 }
 
 char ocean::boatInitial(const position pos) const
@@ -211,6 +223,7 @@ void ocean::shootAt(const position pos)
 {
     if (grid[pos.getRowIndex()][pos.getColIndex()] != -1)
     {
+        // std::cout << "boat found at " << pos << '\n';
         fleet->at(grid[pos.getRowIndex()][pos.getColIndex()])->hit(pos);
     }
 }
@@ -267,7 +280,7 @@ ocean::~ocean()
 
     // delete this->fleet;
 
-    std::cout << "destroying ocean" << '\n';
+    // std::cout << "destroying ocean" << '\n';
 
     // std::cout << "end: " << *(this->fleet->end().base()) << '\n';
     // std::cout << "end addr: " << &this->fleet->end().base() << '\n';
@@ -285,7 +298,7 @@ ocean::~ocean()
     this->fleet = nullptr;
     // std::cout << "deleted pointer\n";
     // fleet = nullptr;
-    std::cout << "destroyed ocean" << '\n';
+    // std::cout << "destroyed ocean" << '\n';
 }
 
 // https://stackoverflow.com/questions/16527829/is-it-considered-good-style-to-dereference-new-pointer

@@ -10,7 +10,37 @@ int main(int argc, char const *argv[])
 
     myOcean.placeAllBoats();
 
-    std::cout << "All sunk: " << (bool)myOcean.allSunk() << std::endl;
+    std::cout << "All sunk: " << myOcean.allSunk() << std::endl;
+
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
+        {
+            char abbrev = myOcean.boatInitial(position(i, j));
+            if (abbrev == ' ')
+            {
+                std::cout << ". ";
+            }
+            else
+            {
+                std::cout << abbrev << " ";
+            }
+        }
+        std::cout << "\n";
+    }
+
+    std::cout << "\n\n";
+
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
+        {
+            position pos(i, j);
+            myOcean.shootAt(pos);
+        }
+    }
+
+    std::cout << "All sunk: " << myOcean.allSunk() << '\n';
 
     for (int i = 0; i < GRID_SIZE; i++)
     {

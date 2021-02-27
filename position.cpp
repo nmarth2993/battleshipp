@@ -11,10 +11,16 @@ position::position(const position &pos) : row(pos.row), col(pos.col)
 }
 
 // !LEARNED! the const identifier after the method header
-// means that the instance is const
+// means that the instance is const (will not be changed in the method)
 bool position::operator==(const position &pos) const
 {
     return pos.col == col && pos.row == row;
+}
+
+bool position::operator==(const position *pos) const
+{
+    return this->col == pos->col && this->row == pos->row;
+    // return *this == *pos;
 }
 
 bool position::operator!=(const position &pos) const
@@ -48,11 +54,6 @@ int position::getRowIndex() const
 int position::getColIndex() const
 {
     return (int)col;
-}
-
-bool position::operator==(const position *pos) const
-{
-    return (bool)(*pos == *this);
 }
 
 /*

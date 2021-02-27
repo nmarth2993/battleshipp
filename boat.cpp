@@ -22,7 +22,7 @@ boat::boat(position pos, std::string name, bool vertical) : pos(pos), name(name)
     }
 
     int length = this->getLength();
-    std::cout << "len: " << length << std::endl;
+    // std::cout << "len: " << length << std::endl;
     if (length == -1)
     {
         std::cerr << "ships cannot have negative length" << std::endl;
@@ -51,8 +51,8 @@ boat::boat(position pos, std::string name, bool vertical) : pos(pos), name(name)
     // build displacement array
     for (int i = 0; i < length; i++)
     {
-        std::cout << "pushed x: " << this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0) << " pushed y: " << this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i) << std::endl;
-        displacement->emplace_back(new position(this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0), this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i)));
+        // std::cout << "pushed x: " << this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0) << " pushed y: " << this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i) << std::endl;
+        displacement->emplace_back(new position(this->pos.getRowIndex() + (this->isVertical() ? i : 0), this->pos.getColIndex() + (this->isVertical() ? 0 : i)));
     }
 }
 
@@ -114,25 +114,25 @@ std::string boat::getName() const
 // returns a boolean of whether or not the ship has the given position
 bool boat::hasPos(const position pos) const
 {
-    // iterate over vector
-    // std::vector<position>::iterator it = this->displacement->begin(); it != this->displacement->end(); it++
-    for (position *p : *this->displacement)
-    {
-        if (pos == p)
-        {
-            return true;
-        }
-    }
-    return false;
+    return hasPosIndex(pos) != -1;
 }
 
 // returns the index of the matching positition, -1 if no match found
 int boat::hasPosIndex(const position pos) const
 {
-    for (std::vector<position>::size_type i = 0; i != this->displacement->size(); i++)
+
+    // std::cout << "vector contents:\n";
+    // for (position *p : *this->displacement)
+    // {
+    // std::cout << *p << '\n';
+    // }
+
+    for (std::vector<position *>::size_type i = 0; i != this->displacement->size(); i++)
     {
+        // std::cout << "check: " << pos << " == " << *this->displacement->at(i) << " " << (pos == *this->displacement->at(i)) << '\n';
         if (pos == this->displacement->at(i))
         {
+            // std::cout << "MATCHED POSITION\n";
             return i;
         }
     }
@@ -167,6 +167,7 @@ void boat::hit(const position pos)
 {
     if (this->hasPos(pos))
     {
+        // std::cout << "has pos " << pos << '\n';
         this->hits[hasPosIndex(pos)] = true;
     }
 }
@@ -175,10 +176,13 @@ void boat::hit(const position pos)
 // the boat is sunk when all of the positons have been hit
 bool boat::sunk() const
 {
+    // std::cout << "checking sunk() with length " << this->getLength() << '\n';
+    // std::cout << "hits[0]: " << this->hits[0] << '\n';
     for (int i = 0; i < this->getLength(); i++)
     {
         if (!this->hits[i])
         {
+            // std::cout << "no hit at index " << i << '\n';
             return false;
         }
     }
@@ -188,7 +192,7 @@ bool boat::sunk() const
 // boat destructor
 boat::~boat()
 {
-    std::cout << "destroying boat " << *this << std::endl;
+    // std::cout << "destroying boat " << *this << std::endl;
     delete[] hits;
     hits = nullptr;
     // this->displacement->clear(); // this should call the destructor for every position class in the vector
@@ -202,7 +206,7 @@ boat::~boat()
 
     delete this->displacement;
     displacement = nullptr;
-    std::cout << "destroyed boat" << std::endl;
+    // std::cout << "destroyed boat" << std::endl;
 }
 
 // int main(int argc, const char *argv[])
