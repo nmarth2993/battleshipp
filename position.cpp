@@ -6,6 +6,13 @@ position::position(int row, int col) : row(row), col(col)
 {
 }
 
+// !LEARNED!
+// this one is just a google search away but this is important to know
+// as of C++11, this is how you pass through other constructors
+position::position(char row, int col) : position((int)row - 'A', col - 1)
+{
+}
+
 position::position(const position &pos) : row(pos.row), col(pos.col)
 {
 }

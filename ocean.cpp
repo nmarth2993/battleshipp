@@ -24,6 +24,7 @@ ocean::ocean()
             this->grid[i][j] = -1;
         }
     }
+    boatIndex = 0;
 }
 
 void ocean::placeBoat(std::string boatName, bool vertical, position pos)

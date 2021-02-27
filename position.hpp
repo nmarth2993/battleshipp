@@ -10,6 +10,7 @@ private:
 
 public:
     position(int row, int col);
+    position(char row, int col);
     ~position();
     position(const position &pos);
     bool operator==(const position &pos) const;
