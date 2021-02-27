@@ -14,7 +14,7 @@ private:
     bool vertical;
 
     bool *hits;
-    std::vector<position> *displacement;
+    std::vector<position *> *displacement;
 
     bool hasPos(const position pos) const;
     int hasPosIndex(const position pos) const;
@@ -54,7 +54,7 @@ static const std::string BOAT_NAMES[] = {
     "Destroyer",
     "Submarine",
     "Battleship",
-    "Carrier",
+    "Aircraft Carrier",
     "Cruiser",
 };
 

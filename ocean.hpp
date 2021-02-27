@@ -10,7 +10,7 @@
 class ocean
 {
 private:
-    std::vector<boat> fleet;
+    std::vector<boat *> *fleet;
     int grid[10][10];
     int boatIndex = 0;
 

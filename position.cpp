@@ -50,6 +50,19 @@ int position::getColIndex() const
     return (int)col;
 }
 
+bool position::operator==(const position *pos) const
+{
+    return (bool)(*pos == *this);
+}
+
+/*
+const position *position::operator*() const
+{
+    const position *ptr = this;
+    return ptr;
+}
+*/
+
 position::~position()
 {
 }

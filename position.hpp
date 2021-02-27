@@ -13,7 +13,9 @@ public:
     ~position();
     position(const position &pos);
     bool operator==(const position &pos) const;
+    bool operator==(const position *pos) const;
     bool operator!=(const position &pos) const;
+    // const position *operator*() const;
 
     // this allows an outside (non-member) function to access private vars
     // !LEARNED! the friend operator is for non-member methods

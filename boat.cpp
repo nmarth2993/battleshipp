@@ -32,19 +32,27 @@ boat::boat(position pos, std::string name, bool vertical) : pos(pos), name(name)
     // make arrays to keep track of hits and positions of ship
     // !LEARNED! don't forget the this-> to operate on the instance
     // instead of causing a leak for no reason lol
+
+    // std::cout << "length: " << length << '\n';
     this->hits = new bool[length];
+
+    for (int i = 0; i < length; i++)
+    {
+        this->hits[i] = false;
+    }
 
     // position squares = new position[length];
 
     // allocate this on heap so that it stays until the boat is destroyed (both meanings)
-    std::vector<position> *boatPositions = new std::vector<position>;
-    this->displacement = boatPositions;
+    // std::vector<position> *boatPositions = new std::vector<position>;
+    // this->displacement = boatPositions;
+    this->displacement = new std::vector<position *>;
 
     // build displacement array
     for (int i = 0; i < length; i++)
     {
         std::cout << "pushed x: " << this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0) << " pushed y: " << this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i) << std::endl;
-        boatPositions->push_back(position(this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0), this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i)));
+        displacement->emplace_back(new position(this->pos.getRowIndex() + 1 + (this->isVertical() ? i : 0), this->pos.getColIndex() + 1 + (this->isVertical() ? 0 : i)));
     }
 }
 
@@ -108,7 +116,7 @@ bool boat::hasPos(const position pos) const
 {
     // iterate over vector
     // std::vector<position>::iterator it = this->displacement->begin(); it != this->displacement->end(); it++
-    for (position p : *(this->displacement))
+    for (position *p : *this->displacement)
     {
         if (pos == p)
         {
@@ -180,10 +188,20 @@ bool boat::sunk() const
 // boat destructor
 boat::~boat()
 {
-    std::cout << "destroying boat" << std::endl;
-    std::cout << *this << std::endl;
-    delete[] this->hits;
+    std::cout << "destroying boat " << *this << std::endl;
+    delete[] hits;
+    hits = nullptr;
+    // this->displacement->clear(); // this should call the destructor for every position class in the vector
+    // not using vector::clear() because the vector now holds pointers
+
+    for (position *p : *this->displacement)
+    {
+        delete p;
+        p = nullptr;
+    }
+
     delete this->displacement;
+    displacement = nullptr;
     std::cout << "destroyed boat" << std::endl;
 }
 
