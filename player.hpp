@@ -6,8 +6,8 @@
 class BattleshipPlayer
 {
 private:
-    BattleshipGrid grid;
-    std::string m_name;
+    BattleshipGrid *grid; // to avoid constructing object
+    std::string *m_name;
 
 public:
     BattleshipPlayer();

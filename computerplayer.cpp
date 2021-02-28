@@ -7,6 +7,7 @@ computerplayer::computerplayer()
 
 void computerplayer::updatePlayer(position pos, bool hit, char initial, std::string boatName, bool sunk, bool gameOver, bool tooManyTurns, int turns)
 {
+    std::cout << "calling update grid from computerplayer\n";
     updateGrid(pos, hit, initial);
 }
 
@@ -30,4 +31,8 @@ position computerplayer::shoot()
             return pos;
         }
     }
+}
+
+computerplayer::~computerplayer()
+{
 }

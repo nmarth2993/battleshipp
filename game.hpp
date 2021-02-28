@@ -10,7 +10,7 @@ class BattleshipGame
 {
 private:
     ocean *m_ocean;
-    BattleshipPlayer m_player;
+    BattleshipPlayer *m_player;
     int m_turns;
 
 public:

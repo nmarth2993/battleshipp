@@ -13,7 +13,7 @@
 class BattleshipGrid
 {
 private:
-    char (*grid)[GRID_SIZE] = new char[GRID_SIZE][GRID_SIZE];
+    char (*grid)[GRID_SIZE];
 
 public:
     BattleshipGrid();
