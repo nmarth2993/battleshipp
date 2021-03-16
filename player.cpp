@@ -14,7 +14,8 @@
 
 BattleshipPlayer::BattleshipPlayer()
 {
-    m_name = new std::string;
+    std::cout << "ctor player\n";
+    m_name = nullptr;
     grid = nullptr;
     // std::cout << "alloc'd player name at addr: " << m_name;
 }
@@ -29,8 +30,9 @@ void BattleshipPlayer::startGame()
     grid->empty(position(1, 1));
     std::cout << "called empty at (A, 1)\n";
 
-    if (this->m_name->empty())
+    if (m_name == nullptr)
     {
+        m_name = new std::string;
         std::cout << "Enter your name: ";
         std::getline(std::cin, *m_name);
     }
@@ -41,6 +43,7 @@ std::string BattleshipPlayer::playerName() const
 }
 position BattleshipPlayer::shoot() const
 {
+    std::cout << "PLAYER SHOOT CALLED\n";
     bool error = false;
     char row;
     int col;
@@ -84,14 +87,14 @@ position BattleshipPlayer::shoot() const
 
 void BattleshipPlayer::updateGrid(position pos, bool hit, char initial)
 {
-    std::cout << "trying to shoot at grid with addr: " << grid << '\n';
+    // std::cout << "trying to shoot at grid with addr: " << grid << '\n';
     grid->shotAt(pos, hit, initial);
-    std::cout << "shot at grid\n";
+    // std::cout << "shot at grid\n";
 }
 
-BattleshipGrid BattleshipPlayer::getGrid() const
+BattleshipGrid *BattleshipPlayer::getGrid() const
 {
-    return *grid;
+    return grid;
 }
 
 void BattleshipPlayer::initializeGrid()
@@ -105,7 +108,10 @@ void BattleshipPlayer::initializeGrid()
     // to swap this, I need to keep track of a pointer
     // to the old grid on the heap...
 
+    delete grid;
     grid = new BattleshipGrid();
+
+    // std::cout << "init grid at " << grid << '\n';
 
     // for now I am just going to leak memory on purpose
     // to make sure that the grid works at least
@@ -138,8 +144,6 @@ void BattleshipPlayer::initializeGrid()
 }
 void BattleshipPlayer::updatePlayer(position pos, bool hit, char initial, std::string boatName, bool sunk, bool gameOver, bool tooManyTurns, int turns)
 {
-    std::cout << "dereferencing grid...\n";
-    std::cout << "addr of grid: " << &grid;
     std::cout << "Turn #" << turns << ": Your shot at " << pos;
     if (hit)
     {
@@ -160,8 +164,8 @@ void BattleshipPlayer::updatePlayer(position pos, bool hit, char initial, std::s
         std::cout << "The game has gone on too long.";
     }
 
-    std::cout << "current addr of grid: " << &grid << '\n';
-    std::cout << "dereferencing grid...\n";
+    // std::cout << "current addr of grid: " << &grid << '\n';
+    // std::cout << "dereferencing grid...\n";
 
     updateGrid(pos, hit, initial);
 
@@ -181,39 +185,18 @@ void BattleshipPlayer::updatePlayer(position pos, bool hit, char initial, std::s
             }
         }
     }
-    std::cout << "updated the player successfully\n";
+    // std::cout << "updated the player successfully\n";
 }
 
 BattleshipPlayer::~BattleshipPlayer()
 {
     delete grid;
-    // delete m_name;
-}
+    grid = nullptr;
+    // std::cout << "name at addr " << m_name << ": " << *m_name << '\n';
 
-/*
-==11390== Conditional jump or move depends on uninitialised value(s)
-==11390==    at 0x10B861: BattleshipPlayer::~BattleshipPlayer() (player.cpp:139)
-==11390==    by 0x10A0C4: PlayerEvaluator::PlayerEvaluator(computerplayer, int) (playerevaluator.cpp:11)
-==11390==    by 0x109BC5: main (strategyevaluator.cpp:14)
-==11390== 
-==11390== Conditional jump or move depends on uninitialised value(s)
-==11390==    at 0x10B861: BattleshipPlayer::~BattleshipPlayer() (player.cpp:139)
-==11390==    by 0x10AE8B: computerplayer::~computerplayer() (computerplayer.cpp:35)
-==11390==    by 0x109BD1: main (strategyevaluator.cpp:14)
-==11390== 
-==11390== Conditional jump or move depends on uninitialised value(s)
-==11390==    at 0x10B861: BattleshipPlayer::~BattleshipPlayer() (player.cpp:139)
-==11390==    by 0x10AE8B: computerplayer::~computerplayer() (computerplayer.cpp:35)
-==11390==    by 0x109C5C: main (strategyevaluator.cpp:17)
-==11390== 
-min: 100 max: 101 avg: 101==11390== 
-==11390== HEAP SUMMARY:
-==11390==     in use at exit: 0 bytes in 0 blocks
-==11390==   total heap usage: 149 allocs, 149 frees, 77,887 bytes allocated
-==11390== 
-==11390== All heap blocks were freed -- no leaks are possible
-==11390== 
-==11390== For counts of detected and suppressed errors, rerun with: -v
-==11390== Use --track-origins=yes to see where uninitialised values come from
-==11390== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
-*/
+    // std::cout << "name len: " << m_name->size() << '\n';
+    // std::cout << "name: " << *m_name << '\n';
+
+    delete m_name;
+    m_name = nullptr;
+}

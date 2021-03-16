@@ -2,7 +2,7 @@
 
 #include "game.hpp"
 
-BattleshipGame::BattleshipGame(BattleshipPlayer player) : m_player(&player)
+BattleshipGame::BattleshipGame(BattleshipPlayer *player) : m_player(player)
 {
     m_ocean = new ocean;
     m_turns = 0;
@@ -26,4 +26,5 @@ int BattleshipGame::play()
 BattleshipGame::~BattleshipGame()
 {
     delete m_ocean;
+    m_ocean = nullptr;
 }

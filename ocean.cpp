@@ -1,7 +1,6 @@
 // #define BOUND_ERR_MSG boundexcept
 // #define OVERLAP_ERR_MSG overlapexcept
 
-#include <time.h>
 #include <string.h>
 
 #include "ocean.hpp"
@@ -14,7 +13,6 @@
 
 ocean::ocean()
 {
-    srand(time(NULL));
     this->fleet = new std::vector<boat *>;
     // this->fleet->reserve(5);
     for (int i = 0; i < GRID_SIZE; i++)

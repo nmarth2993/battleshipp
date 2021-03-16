@@ -4,7 +4,7 @@
 BattleshipGrid::BattleshipGrid()
 {
     this->grid = new char[GRID_SIZE][GRID_SIZE];
-    std::cout << "made new grid on heap at: " << grid << '\n';
+    // std::cout << "made new grid on heap at: " << grid << '\n';
     for (int i = 0; i < GRID_SIZE; i++)
     {
         for (int j = 0; j < GRID_SIZE; j++)
@@ -16,7 +16,7 @@ BattleshipGrid::BattleshipGrid()
 
 void BattleshipGrid::shotAt(position pos, bool hit, char initial)
 {
-    std::cout << "addr of grid: " << grid << '\n';
+    // std::cout << "addr of grid: " << grid << '\n';
     if (!hit)
     {
         grid[pos.getRowIndex()][pos.getColIndex()] = SYMBOL_MISS;
@@ -56,6 +56,17 @@ char BattleshipGrid::boatInitial(position pos) const
 
 BattleshipGrid::~BattleshipGrid()
 {
-    // std::cout << "destroying grid\n";
+    // std::cout << "destroying grid " << grid << '\n';
+    // std::cout << "grid: " << '\n';
+
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
+        {
+            std::cout << grid[i][j] << ' ';
+        }
+        std::cout << '\n';
+    }
+
     delete[] grid;
 }

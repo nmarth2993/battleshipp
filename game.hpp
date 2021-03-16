@@ -14,7 +14,7 @@ private:
     int m_turns;
 
 public:
-    BattleshipGame(BattleshipPlayer player);
+    BattleshipGame(BattleshipPlayer *player);
 
     int play();
 
