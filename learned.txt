@@ -1,0 +1,8 @@
+- polymorphism only works with pointers because without pointers, the object will be casted at compile-time
+- you should never dereference the new operator immediately because it causes a leak since the derference copies
+    the data and the pointer to the alloc'd memory is lost
+- inheritance of member variables only works with protected access-specifier
+- friend operator allows non-member methods to access protected or private data
+- operator<< should return an ostream instance to allow chaining of operators
+- never manually call destructors (will cause a double free), they are called automatically
+- vector.emplace_back() scopes the data into the vector so that the data persists as long as the vector does
