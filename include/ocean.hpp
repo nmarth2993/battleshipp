@@ -11,7 +11,7 @@ class ocean
 {
 private:
     std::vector<boat *> *fleet;
-    int grid[10][10];
+    int grid[GRID_SIZE][GRID_SIZE];
     int boatIndex;
 
 public:

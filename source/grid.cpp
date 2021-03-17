@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/grid.hpp"
+#include "include/grid.hpp"
 
 BattleshipGrid::BattleshipGrid()
 {

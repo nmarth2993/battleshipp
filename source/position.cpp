@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/position.hpp"
+#include "include/position.hpp"
 
 position::position(int row, int col) : row(row), col(col)
 {

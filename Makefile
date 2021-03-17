@@ -1,11 +1,18 @@
 CXX = g++
-CXXFLAGS = -Wall -g
+INC = -I /home/dev/cmsc202/battleship/
+CXXFLAGS = -Wall -g $(INC)
 CMP = -c
+
+S_INC = strategy/include
+S_SRC = strategy/source
+
+bin/CPUstrat: bin/strategyevaluator $(S_INC)/* $(S_SRC)/* source/CPUstrat.cpp
+	$(CXX) $(CXXFLAGS) obj/playerevaluator.o obj/game.o obj/computerplayer.o obj/player.o obj/grid.o obj/ocean.o obj/boat.o obj/position.o $(S_INC)/Brickboard.hpp $(S_INC)/computerstrategy.hpp $(S_INC)/Heatmap.hpp $(S_SRC)/Brickboard.cpp $(S_SRC)/computerstrategy.cpp $(S_SRC)/Heatmap.cpp source/CPUstrat.cpp -o bin/CPUstrat
 
 bin/strategyevaluator: obj/playerevaluator.o source/strategyevaluator.cpp
 	$(CXX) $(CXXFLAGS) obj/playerevaluator.o obj/game.o obj/computerplayer.o obj/player.o obj/grid.o obj/ocean.o obj/boat.o obj/position.o source/strategyevaluator.cpp -o bin/strategyevaluator
 
-playertester: obj/game.o source/playertester.cpp
+bin/playertester: obj/game.o source/playertester.cpp
 	$(CXX) $(CXXFLAGS) obj/game.o obj/player.o obj/grid.o obj/ocean.o obj/boat.o obj/position.o source/playertester.cpp -o bin/playertester
 
 obj/playerevaluator.o: obj/game.o include/playerevaluator.hpp source/playerevaluator.cpp

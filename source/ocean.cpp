@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "../include/ocean.hpp"
+#include "include/ocean.hpp"
 
 // const static std::string sub("Submarine");
 // const static boat TEST_BOAT(position(1, 1), sub, true);

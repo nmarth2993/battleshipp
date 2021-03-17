@@ -1,4 +1,4 @@
-#include "../include/computerplayer.hpp"
+#include "include/computerplayer.hpp"
 
 computerplayer::computerplayer()
 {

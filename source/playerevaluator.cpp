@@ -1,5 +1,5 @@
-#include "../include/playerevaluator.hpp"
-#include "../include/game.hpp"
+#include "include/playerevaluator.hpp"
+#include "include/game.hpp"
 
 #define min(a, b) (a < b ? a : b)
 #define max(a, b) (a > b ? a : b)

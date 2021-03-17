@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/boat.hpp"
+#include "include/boat.hpp"
 
 boat::boat(position pos, std::string name, bool vertical) : pos(pos), name(name), vertical(vertical)
 {

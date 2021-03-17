@@ -10,7 +10,7 @@
 
 #define NUM_HEADER "\n   1 2 3 4 5 6 7 8 9 10\n"
 
-#include "../include/player.hpp"
+#include "include/player.hpp"
 
 BattleshipPlayer::BattleshipPlayer()
 {

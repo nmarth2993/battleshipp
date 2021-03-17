@@ -2,9 +2,9 @@
 
 #include <time.h> // for seeding random
 
-#include "../include/playerevaluator.hpp"
-#include "../include/computerplayer.hpp"
-#include "../include/player.hpp"
+#include "include/playerevaluator.hpp"
+#include "include/computerplayer.hpp"
+#include "include/player.hpp"
 
 int main(int argc, const char *argv[])
 {

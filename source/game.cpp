@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/game.hpp"
+#include "include/game.hpp"
 
 BattleshipGame::BattleshipGame(BattleshipPlayer *player) : m_player(player)
 {
