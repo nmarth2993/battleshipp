@@ -37,7 +37,7 @@ PlayerEvaluator::PlayerEvaluator(computerplayer *player, int runs)
         delete game;
         game = nullptr;
     }
-    std::cout << m_sumTurns << '/' << runs << '=' << (float)m_sumTurns / (float)runs;
+    // std::cout << m_sumTurns << '/' << runs << '=' << (float)m_sumTurns / (float)runs;
     m_avgTurns = (float)m_sumTurns / (float)runs;
     std::cout << "avg: " << m_avgTurns << '\n';
 }
