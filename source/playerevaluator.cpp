@@ -14,13 +14,22 @@ PlayerEvaluator::PlayerEvaluator(computerplayer *player, int runs)
     // std::cout << "calling player shoot...\n";
     // std::cout << "player shoot returned: " << player->shoot() << '\n';
 
+    bool halfwayNotif = false;
+
     for (int i = 0; i < runs; i++)
     {
         game = new BattleshipGame(player);
         turns = game->play();
 
         // turns = BattleshipGame(&player).play();
-        std::cout << "game " << i + 1 << " finished with " << turns << " turns\n";
+        // std::cout << "game " << i + 1 << " finished with " << turns << " turns\n";
+
+        if (!halfwayNotif && i > runs / 2)
+        {
+            std::cout << "50% completed\n";
+            halfwayNotif = true;
+        }
+
         m_sumTurns += turns;
         m_minTurns = min(m_minTurns, turns);
         m_maxTurns = max(m_maxTurns, turns);

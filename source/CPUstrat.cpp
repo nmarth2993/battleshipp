@@ -10,7 +10,7 @@ int main(int argc, const char *argv[])
 {
     srand(time(NULL));
 
-    int runs = 1;
+    int runs = 500;
     std::cout << "running " << runs << " games\n";
 
     // std::cout << "alloc'd computer player at addr: " << computer << '\n';
