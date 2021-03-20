@@ -217,20 +217,20 @@ position computerstrategy::shoot()
 {
     genHeatmap();
 
-    std::cout << "---heatmap---\n";
-    m_heatmap->printMap();
-    std::cout << "-------------\n";
+    // std::cout << "---heatmap---\n";
+    // m_heatmap->printMap();
+    // std::cout << "-------------\n";
 
-    std::cout << "---board---\n";
-    m_board->printMap();
-    std::cout << "-----------\n";
+    // std::cout << "---board---\n";
+    // m_board->printMap();
+    // std::cout << "-----------\n";
 
-    for (std::string boatName : *m_aliveBoats)
-    {
-        std::cout << "alive boat: " << boatName << '\n';
-    }
+    // for (std::string boatName : *m_aliveBoats)
+    // {
+    //     std::cout << "alive boat: " << boatName << '\n';
+    // }
 
-    std::cout << "chose " << m_heatmap->hottestPos() << '\n';
+    // std::cout << "chose " << m_heatmap->hottestPos() << '\n';
 
     return m_heatmap->hottestPos();
 }
@@ -239,7 +239,7 @@ void computerstrategy::updatePlayer(position pos, bool hit, char initial, std::s
 {
     computerplayer::updatePlayer(pos, hit, initial, boatName, sunk, gameOver, tooManyTurns, turns);
 
-    BattleshipPlayer::updatePlayer(pos, hit, initial, boatName, sunk, gameOver, tooManyTurns, turns);
+    // BattleshipPlayer::updatePlayer(pos, hit, initial, boatName, sunk, gameOver, tooManyTurns, turns);
 
     // std::cout << "addr of m_board: " << m_board << '\n';
     // std::cout << "addr of m_aliveBoats: " << m_aliveBoats << '\n';
