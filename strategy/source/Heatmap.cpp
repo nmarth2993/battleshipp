@@ -1,6 +1,6 @@
 #include "strategy/include/Heatmap.hpp"
 
-Heatmap::Heatmap()
+Heatmap::Heatmap(computerplayer *computerplayer) : m_cpuPlayer(computerplayer)
 {
     for (int i = 0; i < GRID_SIZE; i++)
     {
@@ -14,18 +14,21 @@ Heatmap::~Heatmap()
 {
 }
 
-void Heatmap::increment(int *coords[], int weight)
+void Heatmap::increment(std::vector<position> coords, int weight)
 {
-    for (int i = 0; i < GRID_SIZE; i++)
+
+    for (position pos : coords)
     {
-        for (int j = 0; j < GRID_SIZE - 1; j++) // I don't know why this only iterates to the i-1th element but that's how I did it before and I just wanna get this working first
+        // std::cout << "testing at pos: " << pos << '\n';
+        // if the grid is not hit at the location in question, increment the heatmap
+        if (!m_cpuPlayer->getGrid()->hit(pos))
         {
-            if (!m_cpuPlayer->getGrid()->hit(position(coords[i][j], coords[i][j + 1])))
-            {
-                m_heatmap[coords[i][j]][coords[i][j + 1]] += weight;
-            }
+            // std::cout << "inc heatmap at pos: " << pos << '\n';
+            m_heatmap[pos.getRowIndex()][pos.getColIndex()] += weight;
         }
     }
+
+    // std::cout << "done incrementing.\n";
 }
 void Heatmap::printMap() const
 {

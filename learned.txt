@@ -6,3 +6,6 @@
 - operator<< should return an ostream instance to allow chaining of operators
 - never manually call destructors (will cause a double free), they are called automatically
 - vector.emplace_back() scopes the data into the vector so that the data persists as long as the vector does
+- note that const qualified methods are seen as having a completely separate header, so it is easy
+    to overlook declaring a const method in the base class and defining a non-const method in the derived class
+    the error passes silently because it will just use the base class method with no warning

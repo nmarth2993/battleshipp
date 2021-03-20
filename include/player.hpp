@@ -16,7 +16,7 @@ public:
 
     virtual void startGame();
     virtual std::string playerName() const;
-    virtual position shoot() const;
+    virtual position shoot(); // even though this is const, the strategy will not be
     void updateGrid(position pos, bool hit, char initial);
     BattleshipGrid *getGrid() const;
     void initializeGrid();

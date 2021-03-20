@@ -17,10 +17,10 @@ private:
     computerplayer *m_cpuPlayer;
 
 public:
-    Heatmap();
+    Heatmap(computerplayer *computerPlayer);
     ~Heatmap();
 
-    void increment(int *coords[], int amt);
+    void increment(std::vector<position> coords, int weight);
     void printMap() const;
     std::array<std::array<int, GRID_SIZE>, GRID_SIZE> getHeatmap() const;
     position hottestPos() const;

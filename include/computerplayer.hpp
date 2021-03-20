@@ -11,10 +11,10 @@ public:
     computerplayer();
     virtual ~computerplayer();
 
-    void updatePlayer(position pos, bool hit, char initial, std::string boatName, bool sunk, bool gameOver, bool tooManyTurns, int turns);
-    std::string playerName() const;
-    void startGame();
-    position shoot() const;
+    virtual void updatePlayer(position pos, bool hit, char initial, std::string boatName, bool sunk, bool gameOver, bool tooManyTurns, int turns);
+    virtual std::string playerName() const;
+    virtual void startGame();
+    virtual position shoot(); // not const to accomodate strategy
 
     // TODO: figure out how to do polymorphism
 

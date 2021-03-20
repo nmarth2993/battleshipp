@@ -27,7 +27,7 @@ public:
 
     void placeBoat(std::string boatName, bool vertical, position pos) const;
     void restrict(position pos);
-    void printMap(std::array<std::array<bool, GRID_SIZE>, GRID_SIZE> map) const;
+    void printMap() const;
 };
 
 #endif

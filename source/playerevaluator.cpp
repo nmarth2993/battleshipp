@@ -4,12 +4,19 @@
 #define min(a, b) (a < b ? a : b)
 #define max(a, b) (a > b ? a : b)
 
-PlayerEvaluator::PlayerEvaluator(computerplayer player, int runs)
+PlayerEvaluator::PlayerEvaluator(computerplayer *player, int runs)
 {
     BattleshipGame *game;
+
+    // std::cout << "typeid: " << typeid(*player).name() << '\n';
+
+    // std::cout << "name of player: " << player->playerName() << '\n';
+    // std::cout << "calling player shoot...\n";
+    // std::cout << "player shoot returned: " << player->shoot() << '\n';
+
     for (int i = 0; i < runs; i++)
     {
-        game = new BattleshipGame(&player);
+        game = new BattleshipGame(player);
         turns = game->play();
 
         // turns = BattleshipGame(&player).play();

@@ -21,11 +21,10 @@ std::string computerplayer::playerName() const
 
 void computerplayer::startGame()
 {
-    std::cout << "startgame called, init grid\n";
     initializeGrid();
 }
 
-position computerplayer::shoot() const
+position computerplayer::shoot()
 {
     // std::cout << "---grid---\n";
     // for (int i = 0; i < GRID_SIZE; i++)
@@ -48,6 +47,8 @@ position computerplayer::shoot() const
     //     std::cout << '\n';
     // }
     // std::cout << "----------\n";
+
+    // std::cout << "computer player shoot called\n";
 
     for (;;)
     {

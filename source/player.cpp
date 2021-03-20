@@ -14,7 +14,7 @@
 
 BattleshipPlayer::BattleshipPlayer()
 {
-    std::cout << "ctor player\n";
+    // std::cout << "ctor player\n";
     m_name = nullptr;
     grid = nullptr;
     // std::cout << "alloc'd player name at addr: " << m_name;
@@ -23,12 +23,12 @@ BattleshipPlayer::BattleshipPlayer()
 void BattleshipPlayer::startGame()
 {
     // create grid
-    initializeGrid(); // TODO: FOR SOME REASON THIS METHOD DOES NOT MODIFY
-    std::cout << "grid addr: " << grid << '\n';
+    initializeGrid();
+    // std::cout << "grid addr: " << grid << '\n';
 
-    std::cout << "dereferencing grid...\n";
-    grid->empty(position(1, 1));
-    std::cout << "called empty at (A, 1)\n";
+    // std::cout << "dereferencing grid...\n";
+    // grid->empty(position(1, 1));
+    // std::cout << "called empty at (A, 1)\n";
 
     if (m_name == nullptr)
     {
@@ -41,9 +41,9 @@ std::string BattleshipPlayer::playerName() const
 {
     return *m_name;
 }
-position BattleshipPlayer::shoot() const
+position BattleshipPlayer::shoot()
 {
-    std::cout << "PLAYER SHOOT CALLED\n";
+    // std::cout << "PLAYER SHOOT CALLED\n";
     bool error = false;
     char row;
     int col;
@@ -94,54 +94,16 @@ void BattleshipPlayer::updateGrid(position pos, bool hit, char initial)
 
 BattleshipGrid *BattleshipPlayer::getGrid() const
 {
+    // std::cout << "grid addr: " << grid << '\n';
     return grid;
 }
 
 void BattleshipPlayer::initializeGrid()
 {
-    // TODO: FIX THIS METHOD BECAUSE THIS DOES NOT WORK
-    // UHH COPY THIS SECTION OUT AND MAKE A CLEAN EXAMPLE
-    // it's clearly not doing what I'm thinking it should do
-    // what I want to do is to swap the grid so that I can
-    // assign grid a new pointer on the heap
-    // and then delete the old grid from the heap
-    // to swap this, I need to keep track of a pointer
-    // to the old grid on the heap...
-
     delete grid;
     grid = new BattleshipGrid();
-
-    // std::cout << "init grid at " << grid << '\n';
-
-    // for now I am just going to leak memory on purpose
-    // to make sure that the grid works at least
-    // because I might have a deeper error than just a leak
-    // XXX: also, the inheritance is not working correctly as of now
-
-    /* BEGIN METHOD CODE
-    std::cout << "INIT GRID\n";
-    // make a new one and then swap
-    BattleshipGrid **tmp = &grid;
-    grid = new BattleshipGrid();
-
-    std::cout << "grid addr: " << &grid << '\n';
-    std::cout << "*tmp: " << *tmp << '\n';
-
-    if (*tmp != nullptr)
-    {
-        std::cout << "deleting *tmp with addr: " << *tmp << '\n';
-        delete *tmp;
-    }
-    *tmp = nullptr;
-
-    std::cout << "end grid addr: " << grid << '\n';
-    std::cout << "end *tmp: " << *tmp << '\n';
-
-    std::cout << "dereferencing grid in INIT_GRID\n";
-    grid->empty(position(1, 1));
-    std::cout << "called grid->empty() on (A, 1)\n";
-    */
 }
+
 void BattleshipPlayer::updatePlayer(position pos, bool hit, char initial, std::string boatName, bool sunk, bool gameOver, bool tooManyTurns, int turns)
 {
     std::cout << "Turn #" << turns << ": Your shot at " << pos;

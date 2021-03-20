@@ -193,6 +193,12 @@ bool boat::sunk() const
 boat::~boat()
 {
     // std::cout << "destroying boat " << *this << std::endl;
+
+    // std::cout << "deleting boat at addr: " << this << '\n';
+
+    // std::cout << "deleting hits at addr: " << hits << '\n';
+    // std::cout << "hits[0]: " << hits[0] << '\n';
+
     delete[] hits;
     hits = nullptr;
     // this->displacement->clear(); // this should call the destructor for every position class in the vector

@@ -6,7 +6,7 @@ CMP = -c
 S_INC = strategy/include
 S_SRC = strategy/source
 
-bin/CPUstrat: bin/strategyevaluator $(S_INC)/* $(S_SRC)/* source/CPUstrat.cpp
+bin/CPUstrat: bin/strategyevaluator $(S_INC)/Brickboard.hpp $(S_INC)/computerstrategy.hpp $(S_INC)/Heatmap.hpp $(S_SRC)/Brickboard.cpp $(S_SRC)/computerstrategy.cpp $(S_SRC)/Heatmap.cpp source/CPUstrat.cpp
 	$(CXX) $(CXXFLAGS) obj/playerevaluator.o obj/game.o obj/computerplayer.o obj/player.o obj/grid.o obj/ocean.o obj/boat.o obj/position.o $(S_INC)/Brickboard.hpp $(S_INC)/computerstrategy.hpp $(S_INC)/Heatmap.hpp $(S_SRC)/Brickboard.cpp $(S_SRC)/computerstrategy.cpp $(S_SRC)/Heatmap.cpp source/CPUstrat.cpp -o bin/CPUstrat
 
 bin/strategyevaluator: obj/playerevaluator.o source/strategyevaluator.cpp

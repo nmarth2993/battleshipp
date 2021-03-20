@@ -20,7 +20,7 @@ int main(int argc, const char *argv[])
 
     // std::cout << "calling computerplayer name: " << computer->computerplayer::playerName() << '\n';
 
-    PlayerEvaluator evaluator(*computer, runs);
+    PlayerEvaluator evaluator(computer, runs);
     std::cout << "min: " << evaluator.minTurns() << " max: " << evaluator.maxTurns() << " avg: " << evaluator.averageTurns() << '\n';
 
     delete computer;

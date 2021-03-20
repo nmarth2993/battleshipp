@@ -13,7 +13,7 @@ private:
     int turns;
 
 public:
-    PlayerEvaluator(computerplayer player, int runs);
+    PlayerEvaluator(computerplayer *player, int runs);
 
     int maxTurns() const;
     int minTurns() const;

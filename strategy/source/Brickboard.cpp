@@ -16,7 +16,7 @@ Brickboard::~Brickboard()
 
 void Brickboard::placeBoat(std::string boatName, bool vertical, position pos) const
 {
-    boat b(pos, boatName, vertical);
+    boat testBoat(pos, boatName, vertical);
 
     if (pos.getRowIndex() < 0 || pos.getColIndex() < 0 || pos.getRowIndex() > 9 || pos.getColIndex() > 9)
     {
@@ -25,17 +25,16 @@ void Brickboard::placeBoat(std::string boatName, bool vertical, position pos) co
     }
     if (vertical)
     {
-        if (b.getLength() - 1 + pos.getRowIndex() > 9)
+        if (testBoat.getLength() - 1 + pos.getRowIndex() > 9)
         {
             // std::cout << "vertical boat does not fit\n";
             throw std::exception();
         }
 
         // check for collision with other boats
-        for (int row = pos.getRowIndex(); row < b.getLength() + pos.getRowIndex(); row++)
+        for (int row = pos.getRowIndex(); row < testBoat.getLength() + pos.getRowIndex(); row++)
         {
-            // check pos not empty
-            if (!m_board[row][pos.getColIndex()])
+            if (m_board[row][pos.getColIndex()])
             {
                 // std::cout << "collision\n";
                 throw std::exception();
@@ -44,30 +43,31 @@ void Brickboard::placeBoat(std::string boatName, bool vertical, position pos) co
     }
     else
     {
-        if (b.getLength() - 1 + pos.getColIndex() > 9)
+        if (testBoat.getLength() - 1 + pos.getColIndex() > 9)
         {
             // std::cout << "horizonal boat does not fit\n";
             throw std::exception();
         }
 
-        for (int col = pos.getColIndex(); col < b.getLength() + pos.getColIndex(); col++)
+        for (int col = pos.getColIndex(); col < testBoat.getLength() + pos.getColIndex(); col++)
         {
-            // check pos not empty
-            if (!m_board[pos.getRowIndex()][col])
+            if (m_board[pos.getRowIndex()][col])
             {
                 // std::cout << "collision\n";
                 throw std::exception();
             }
         }
     }
+
+    // std::cout << "end placement. no exception thrown\n";
 }
 
 void Brickboard::restrict(position pos)
 {
-    m_board[pos.getRowIndex()][pos.getColIndex()] = true;
+    m_board[pos.getRowIndex()][pos.getColIndex()] = BOARD_RESTRICTED;
 }
 
-void Brickboard::printMap(std::array<std::array<bool, GRID_SIZE>, GRID_SIZE> map) const
+void Brickboard::printMap() const
 {
     for (int i = 0; i < GRID_SIZE; i++)
     {
