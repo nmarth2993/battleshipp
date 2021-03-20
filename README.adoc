@@ -18,3 +18,5 @@ Installation
 ~~~~~~~~~~~~
 
 To run this program yourself, simply download the project and run the included makefile.
+
+Note that the default makefile target produces an executable which runs the computer strategy for 500 games.
