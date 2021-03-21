@@ -1,7 +1,7 @@
 Battleshipp
 -----------
 
-NOTE: This project was for the purpose of learning C++ so there are mistakes (some known, and likely others unknown)
+NOTE: This project was for the purpose of learning C++ and I had limited time to complete it, so there may be some code that could be refactored.
 
 The Strategy
 ~~~~~~~~~~~~
