@@ -1,5 +1,5 @@
 CXX = g++
-INC = -I /home/dev/cmsc202/battleship/
+INC = -I $(shell pwd)
 CXXFLAGS = -Wall -g $(INC)
 CMP = -c
 
