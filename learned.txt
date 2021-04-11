@@ -9,3 +9,9 @@
 - note that const qualified methods are seen as having a completely separate header, so it is easy
     to overlook declaring a const method in the base class and defining a non-const method in the derived class
     the error passes silently because it will just use the base class method with no warning
+- when exceptions are created on the stack to be thrown, they are copied to a special area as defined by the compiler so that
+    the object may be deallocated even if the stack has been unwound. this is handled completely by the compiler.
+    related, if you choose to throw new std::exception (allocate exception on heap), the catch clause must catch a std::exception*
+    and assume responsibility for said pointer (must delete it before going out of scope, otherwise a memory leak will result)
+    I mention throwing a heap-allocated exception only for completeness, as this is not a common practice and most catch clauses expect
+    an exception reference.
