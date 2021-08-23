@@ -1,6 +1,6 @@
 CXX = g++
 INC = -I $(shell pwd)
-CXXFLAGS = -Wall -g $(INC)
+CXXFLAGS = -Wall -O3 -g $(INC)
 CMP = -c
 
 S_INC = strategy/include
