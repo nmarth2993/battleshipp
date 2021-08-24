@@ -12,7 +12,7 @@ The strategy is an implementation of an amazing write-up done by [DataGenetics](
 
 ![battleshipfast](https://user-images.githubusercontent.com/35354196/130553440-ef5f03fc-3da0-486d-8f02-17af0aea79c0.gif)
 
-<p style="font-size:14px">Visual example of the strategy</p>
+<p style="font-size:11px">Visual example of the strategy</p>
 
 
 
