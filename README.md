@@ -5,10 +5,21 @@ The default computer player chooses a random square that has not yet been hit. T
 
 The strategy is an implementation of an amazing writeup done by [DataGenetics](https://www.datagenetics.com/blog/december32011/)
 
+
+
+
 ![battleshipfast](https://user-images.githubusercontent.com/35354196/130553440-ef5f03fc-3da0-486d-8f02-17af0aea79c0.gif)
+
+<p style="font-size:14px">Visual example of the strategy</p>
+
 
 
 ## Installation
-To run this program yourself, simply download the project and run the included madefile.
+To run this program yourself, simply download the project and run the included makefile.
 
 Note that the default makefile produces an executable which runs the computer strategy for 100 games.
+
+The program can be compiled and run using the command
+```console
+make && bin/CPUstrat
+```
