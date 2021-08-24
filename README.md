@@ -22,6 +22,6 @@ To run this program yourself, simply download the project and run the included m
 Note that the default makefile produces an executable which runs the computer strategy for 100 games.
 
 The program can be compiled and run using the command
-```console
+```sh
 make && bin/CPUstrat
 ```
