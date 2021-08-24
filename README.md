@@ -1,5 +1,7 @@
 # Battleshipp
 
+This project was for the purpose of learning C++. You can find some notes about what I learned in `learned.txt` The program is capable of letting either a human or computer play against randomly placed ships.
+
 ## The Strategy
 The default computer player chooses a random square that has not yet been hit. There is another strategy included which, to my knowledge, is the best possible battleship strategy.
 
