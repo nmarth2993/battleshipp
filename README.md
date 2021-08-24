@@ -5,7 +5,9 @@ The default computer player chooses a random square that has not yet been hit. T
 
 The strategy is an implementation of an amazing writeup done by [DataGenetics](https://www.datagenetics.com/blog/december32011/)
 
-![battleshipdemo](https://user-images.githubusercontent.com/35354196/130553213-d092bf91-b247-4d1b-b88a-4c7b10e906a7.gif)
+<!--> ![battleshipdemo](https://user-images.githubusercontent.com/35354196/130553213-d092bf91-b247-4d1b-b88a-4c7b10e906a7.gif) <!-->
+![battleshipfast](https://user-images.githubusercontent.com/35354196/130553440-ef5f03fc-3da0-486d-8f02-17af0aea79c0.gif)
+
 
 ## Installation
 To run this program yourself, simply download the project and run the included madefile.
