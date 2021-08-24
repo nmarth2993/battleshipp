@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 #include <time.h> // for seeding random
 
@@ -21,6 +22,10 @@ int main(int argc, const char *argv[])
 
     PlayerEvaluator evaluator(computer, runs);
     std::cout << "min: " << evaluator.minTurns() << " max: " << evaluator.maxTurns() << " avg: " << evaluator.averageTurns() << '\n';
+    std::cout << "------\n";
+    std::cout << "Simple hunt algorithm: ~65 shots average\n";
+    std::cout << "This strategy: " << evaluator.averageTurns() << " shots average\n";
+    std::cout << "==> " << std::round(((65.f - evaluator.averageTurns()) / 65.f * 100.f)) << "% less shots on average\n";
 
     delete computer;
     computer = nullptr;
