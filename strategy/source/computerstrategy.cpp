@@ -27,6 +27,7 @@ computerstrategy::~computerstrategy()
 
 void computerstrategy::initAliveBoats()
 {
+    delete m_aliveBoats;
     m_aliveBoats = new std::vector<std::string>;
     // std::cout << "alloc'd new vector at " << m_aliveBoats << '\n';
     for (int i = 0; i < 5; i++)
@@ -148,6 +149,7 @@ std::string computerstrategy::author() const
 void computerstrategy::startGame()
 {
     initAliveBoats();
+    delete m_board;
     m_board = new Brickboard();
     computerplayer::startGame();
 }
