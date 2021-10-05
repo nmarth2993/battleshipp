@@ -23,5 +23,5 @@ Note that the default makefile produces an executable which runs the computer st
 
 The program can be compiled and run using the command
 ```sh
-make && bin/CPUstrat
+make && make run
 ```
