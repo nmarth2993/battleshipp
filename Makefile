@@ -42,4 +42,7 @@ obj/position.o: include/position.hpp source/position.cpp
 clean:
 	rm obj/* bin/*
 
-.PHONY: clean
+run:
+	bin/CPUstrat
+
+.PHONY: clean run
